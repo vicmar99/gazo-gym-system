@@ -1,5 +1,7 @@
 package com.gazo.gymsystem.entity;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,4 +29,17 @@ public class Cliente {
     private LocalDateTime fechaRegistro;
 
     private Boolean activo;
+
+    @Column(name = "tipo_pago")
+    private String tipoPago;
+
+    @Column(name = "fecha_inicio")
+    private LocalDate fechaInicio;
+
+    @Column(name = "fecha_vencimiento")
+    private LocalDateTime fechaVencimiento;
+
+    private BigDecimal monto;
+
+    private String estatus;
 }

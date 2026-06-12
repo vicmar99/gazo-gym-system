@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Pago</title>
+</head>
+
+<body>
+
+<h1>Registrar Pago</h1>
+
+<div th:if="${param.success}">
+    <p style="color: green;">
+        Pago registrado correctamente.
+    </p>
+</div>
+
+<form th:action="@{/pagos}"
+      method="post"
+      th:object="${pagoRequest}">
+
+    <label>Cliente:</label>
+
+    <select th:field="*{idCliente}" required>
+        <option value="">Seleccione un cliente</option>
+
+        <option
+                th:each="cliente : ${clientes}"
+                th:value="${cliente.idCliente}"
+                th:text="${cliente.nombre + ' (' + cliente.idCliente + ')'}">
+        </option>
+    </select>
+
+    <br><br>
+
+    <label>Membresía:</label>
+
+    <select th:field="*{idMembresia}" required>
+
+        <option value="">Seleccione una membresía</option>
+
+        <option
+                th:each="membresia : ${membresias}"
+                th:value="${membresia.idMembresia}"
+                th:text="${membresia.nombre}">
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <label>Períodos:</label>
+
+    <input
+            type="number"
+            th:field="*{periodos}"
+            min="1"
+            required>
+
+    <br><br>
+
+    <label>Descuento:</label>
+
+    <input
+            type="number"
+            th:field="*{descuento}"
+            step="0.01"
+            min="0">
+
+    <br><br>
+
+    <label>Método de pago:</label>
+
+    <select th:field="*{metodoPago}" required>
+
+        <option value="">Seleccione un método</option>
+
+        <option value="EFECTIVO">
+            Efectivo
+        </option>
+
+        <option value="TRANSFERENCIA">
+            Transferencia
+        </option>
+
+        <option value="TARJETA">
+            Tarjeta
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Registrar pago
+    </button>
+
+</form>
+
+</body>
+</html>

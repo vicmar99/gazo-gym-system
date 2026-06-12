@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Control de Acceso</title>
+</head>
+
+<body>
+
+<h1>CONTROL DE ACCESO GAZO</h1>
+
+<form th:action="@{/asistencias}"
+      method="post">
+
+  <input type="text"
+         name="qr"
+         autofocus
+         placeholder="Escanee la credencial"
+         autocomplete="off">
+
+</form>
+
+<br>
+
+<h2 th:if="${mensaje}"
+    th:text="${mensaje}">
+</h2>
+
+</body>
+</html>
