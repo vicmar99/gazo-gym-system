@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 
 import com.gazo.gymsystem.entity.Cliente;
 import java.util.List;
-
+import com.gazo.gymsystem.entity.Pago;
+import java.util.List;
 @Service
 public class DashboardServiceImpl
         implements DashboardService {
@@ -83,6 +84,14 @@ public class DashboardServiceImpl
                         LocalDateTime.now(),
                         LocalDateTime.now().plusDays(3)
                 );
+
+    }
+
+    @Override
+    public List<Pago> obtenerUltimosPagos() {
+
+        return pagoRepository
+                .findTop5ByOrderByFechaPagoDesc();
 
     }
 

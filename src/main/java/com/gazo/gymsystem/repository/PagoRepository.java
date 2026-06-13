@@ -26,6 +26,6 @@ public interface PagoRepository
             LocalDateTime inicio
     );
 
-    List<Pago> findTop10ByOrderByFechaPagoDesc();
+    List<Pago> findTop5ByOrderByFechaPagoDesc();
 
 }

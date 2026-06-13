@@ -53,6 +53,49 @@
   </tr>
 
 </table>
+<hr>
 
+<h2>Últimos pagos registrados</h2>
+
+<div th:if="${#lists.isEmpty(ultimosPagos)}">
+
+  <p>No hay pagos registrados.</p>
+
+</div>
+
+<table
+        th:unless="${#lists.isEmpty(ultimosPagos)}"
+        border="1">
+
+  <tr>
+    <th>Fecha</th>
+    <th>Cliente</th>
+    <th>Membresía</th>
+    <th>Monto</th>
+    <th>Método</th>
+  </tr>
+
+  <tr th:each="pago : ${ultimosPagos}">
+
+    <td th:text="${#temporals.format(
+                pago.fechaPago,
+                'dd/MM/yyyy HH:mm')}">
+    </td>
+
+    <td th:text="${pago.cliente.nombre}">
+    </td>
+
+    <td th:text="${pago.membresia.nombre}">
+    </td>
+
+    <td th:text="${'$' + pago.montoPagado}">
+    </td>
+
+    <td th:text="${pago.metodoPago}">
+    </td>
+
+  </tr>
+
+</table>
 </body>
 </html>
