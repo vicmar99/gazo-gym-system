@@ -97,5 +97,38 @@
   </tr>
 
 </table>
+
+<hr>
+
+<h2>Últimas asistencias registradas</h2>
+
+<div th:if="${#lists.isEmpty(ultimasAsistencias)}">
+
+  <p>No hay asistencias registradas.</p>
+
+</div>
+
+<table
+        th:unless="${#lists.isEmpty(ultimasAsistencias)}"
+        border="1">
+
+  <tr>
+    <th>Fecha y hora</th>
+    <th>Cliente</th>
+  </tr>
+
+  <tr th:each="asistencia : ${ultimasAsistencias}">
+
+    <td th:text="${#temporals.format(
+                asistencia.fechaHora,
+                'dd/MM/yyyy HH:mm')}">
+    </td>
+
+    <td th:text="${asistencia.cliente.nombre}">
+    </td>
+
+  </tr>
+
+</table>
 </body>
 </html>

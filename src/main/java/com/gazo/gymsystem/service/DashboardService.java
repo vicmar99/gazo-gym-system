@@ -2,6 +2,7 @@ package com.gazo.gymsystem.service;
 
 import com.gazo.gymsystem.entity.Cliente;
 import com.gazo.gymsystem.entity.Pago;
+import com.gazo.gymsystem.entity.Asistencia;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -18,5 +19,7 @@ public interface DashboardService {
     List<Cliente> obtenerProximosVencimientos();
 
     List<Pago> obtenerUltimosPagos();
+
+    List<Asistencia> obtenerUltimasAsistencias();
 
 }

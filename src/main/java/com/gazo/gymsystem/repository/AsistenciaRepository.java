@@ -13,6 +13,6 @@ public interface AsistenciaRepository
             LocalDateTime fecha
     );
 
-    List<Asistencia> findTop10ByOrderByFechaHoraDesc();
+    List<Asistencia> findTop5ByOrderByFechaHoraDesc();
 
 }

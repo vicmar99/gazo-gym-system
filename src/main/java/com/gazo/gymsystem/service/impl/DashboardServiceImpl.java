@@ -5,6 +5,8 @@ import com.gazo.gymsystem.repository.ClienteRepository;
 import com.gazo.gymsystem.repository.PagoRepository;
 import com.gazo.gymsystem.service.DashboardService;
 import org.springframework.stereotype.Service;
+import com.gazo.gymsystem.entity.Asistencia;
+import java.util.List;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -92,6 +94,14 @@ public class DashboardServiceImpl
 
         return pagoRepository
                 .findTop5ByOrderByFechaPagoDesc();
+
+    }
+
+    @Override
+    public List<Asistencia> obtenerUltimasAsistencias() {
+
+        return asistenciaRepository
+                .findTop5ByOrderByFechaHoraDesc();
 
     }
 

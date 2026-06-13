@@ -49,6 +49,11 @@ public class DashboardController {
                 dashboardService.obtenerUltimosPagos()
         );
 
+        model.addAttribute(
+                "ultimasAsistencias",
+                dashboardService.obtenerUltimasAsistencias()
+        );
+
         return "dashboard";
     }
 }
