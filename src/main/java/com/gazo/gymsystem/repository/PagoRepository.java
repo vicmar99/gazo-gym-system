@@ -28,4 +28,9 @@ public interface PagoRepository
 
     List<Pago> findTop5ByOrderByFechaPagoDesc();
 
+
+    List<Pago> findByClienteIdClienteOrderByFechaPagoDesc(
+            String idCliente
+    );
+
 }

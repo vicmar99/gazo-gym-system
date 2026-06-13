@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Ficha del Cliente</title>
+</head>
+
+<body>
+
+<h1 th:text="${cliente.nombre}"></h1>
+
+<p>
+  <strong>ID:</strong>
+  <span th:text="${cliente.idCliente}"></span>
+</p>
+
+<p>
+  <strong>Teléfono:</strong>
+  <span th:text="${cliente.telefono}"></span>
+</p>
+
+<p>
+  <strong>Estatus:</strong>
+  <span th:text="${cliente.estatus}"></span>
+</p>
+
+<p>
+  <strong>Vence:</strong>
+
+  <span th:if="${cliente.fechaVencimiento != null}"
+        th:text="${#temporals.format(
+                  cliente.fechaVencimiento,
+                  'dd/MM/yyyy HH:mm')}">
+    </span>
+
+</p>
+
+<hr>
+
+<h2>Historial de pagos</h2>
+
+<table border="1">
+
+  <tr>
+    <th>Fecha</th>
+    <th>Monto</th>
+  </tr>
+
+  <tr th:each="pago : ${pagos}">
+
+    <td th:text="${#temporals.format(
+                pago.fechaPago,
+                'dd/MM/yyyy HH:mm')}">
+    </td>
+
+    <td th:text="${'$' + pago.montoPagado}">
+    </td>
+
+  </tr>
+
+</table>
+
+<hr>
+
+<h2>Historial de asistencias</h2>
+
+<table border="1">
+
+  <tr>
+    <th>Fecha</th>
+  </tr>
+
+  <tr th:each="asistencia : ${asistencias}">
+
+    <td th:text="${#temporals.format(
+                asistencia.fechaHora,
+                'dd/MM/yyyy HH:mm')}">
+    </td>
+
+  </tr>
+
+</table>
+
+</body>
+</html>

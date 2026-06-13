@@ -15,4 +15,8 @@ public interface AsistenciaRepository
 
     List<Asistencia> findTop5ByOrderByFechaHoraDesc();
 
+    List<Asistencia> findByClienteIdClienteOrderByFechaHoraDesc(
+            String idCliente
+    );
+
 }
