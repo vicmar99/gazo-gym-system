@@ -1,4 +1,4 @@
-package com.gazo.gymsystem.config;
+package com.gazo.gymsystem.security;
 
 import com.gazo.gymsystem.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;

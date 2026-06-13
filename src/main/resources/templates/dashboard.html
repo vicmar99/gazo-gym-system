@@ -1,23 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Dashboard</title>
+  <title>Dashboard - GAZO Fitness</title>
 </head>
+
 <body>
 
-<h1>Bienvenido a GAZO Gym System</h1>
-<a th:href="@{/pagos}">
+<h1>Dashboard GAZO Fitness</h1>
 
-  Registrar pago
+<hr>
 
-</a>
-<p>Primer módulo funcionando.</p>
+<h2>Clientes activos:</h2>
 
-<form th:action="@{/logout}" method="post">
-  <button type="submit">
-    Cerrar sesión
-  </button>
-</form>
+<h3 th:text="${clientesActivos}"></h3>
+
+<hr>
+
+<h2>Asistencias hoy:</h2>
+
+<h3 th:text="${asistenciasHoy}"></h3>
+
+<hr>
+
+<h2>Ingresos hoy:</h2>
+
+<h3 th:text="'$' + ${ingresosHoy}"></h3>
+
+<hr>
+
+<h2>Ingresos del mes:</h2>
+
+<h3 th:text="'$' + ${ingresosMes}"></h3>
 
 </body>
 </html>

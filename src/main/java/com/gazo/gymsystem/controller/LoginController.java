@@ -11,8 +11,4 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/")
-    public String inicio() {
-        return "dashboard";
-    }
 }
