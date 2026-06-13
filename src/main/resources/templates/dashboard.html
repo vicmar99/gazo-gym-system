@@ -32,5 +32,27 @@
 
 <h3 th:text="'$' + ${ingresosMes}"></h3>
 
+<hr>
+
+<h2>Próximos vencimientos</h2>
+
+<table border="1">
+
+  <tr>
+    <th>Cliente</th>
+    <th>Vence</th>
+  </tr>
+
+  <tr th:each="cliente : ${proximosVencimientos}">
+
+    <td th:text="${cliente.nombre}"></td>
+
+    <td th:text="${#temporals.format(cliente.fechaVencimiento,
+                                         'dd/MM/yyyy HH:mm')}"></td>
+
+  </tr>
+
+</table>
+
 </body>
 </html>

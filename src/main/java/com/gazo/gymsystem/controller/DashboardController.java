@@ -39,6 +39,11 @@ public class DashboardController {
                 dashboardService.obtenerIngresosMes()
         );
 
+        model.addAttribute(
+                "proximosVencimientos",
+                dashboardService.obtenerProximosVencimientos()
+        );
+
         return "dashboard";
     }
 }

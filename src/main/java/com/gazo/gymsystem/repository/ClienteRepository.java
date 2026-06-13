@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public interface ClienteRepository
         extends JpaRepository<Cliente, String> {
 
@@ -13,4 +16,8 @@ public interface ClienteRepository
             LocalDateTime fecha
     );
 
+    List<Cliente> findTop10ByFechaVencimientoBetweenOrderByFechaVencimientoAsc(
+            LocalDateTime inicio,
+            LocalDateTime fin
+    );
 }

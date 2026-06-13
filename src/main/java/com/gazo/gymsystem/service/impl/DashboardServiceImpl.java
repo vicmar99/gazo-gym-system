@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.gazo.gymsystem.entity.Cliente;
+import java.util.List;
+
 @Service
 public class DashboardServiceImpl
         implements DashboardService {
@@ -68,6 +71,17 @@ public class DashboardServiceImpl
                         LocalDate.now()
                                 .withDayOfMonth(1)
                                 .atStartOfDay()
+                );
+
+    }
+
+    @Override
+    public List<Cliente> obtenerProximosVencimientos() {
+
+        return clienteRepository
+                .findTop10ByFechaVencimientoBetweenOrderByFechaVencimientoAsc(
+                        LocalDateTime.now(),
+                        LocalDateTime.now().plusDays(3)
                 );
 
     }
