@@ -23,7 +23,7 @@ public class CredencialController {
         this.clienteRepository = clienteRepository;
     }
 
-    @GetMapping("/{idCliente}/qr")
+    @GetMapping("/{idCliente}")
     public ResponseEntity<byte[]> generarQr(
             @PathVariable String idCliente
     ) throws Exception {
@@ -33,16 +33,18 @@ public class CredencialController {
                 .orElseThrow(() ->
                         new RuntimeException("Cliente no encontrado"));
 
-        byte[] qr =
+        byte[] pdf =
                 credencialService.generarCredencial(cliente);
 
         return ResponseEntity.ok()
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
-                        "inline; filename=qr.png"
+                        "attachment; filename=credencial_"
+                                + cliente.getIdCliente()
+                                + ".pdf"
                 )
-                .contentType(MediaType.IMAGE_PNG)
-                .body(qr);
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
 
     }
 

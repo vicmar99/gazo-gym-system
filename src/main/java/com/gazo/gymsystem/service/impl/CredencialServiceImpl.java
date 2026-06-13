@@ -17,6 +17,13 @@ import java.io.InputStream;
 
 import java.io.ByteArrayOutputStream;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+
 @Service
 public class CredencialServiceImpl implements CredencialService {
 
@@ -118,14 +125,45 @@ public class CredencialServiceImpl implements CredencialService {
 
         g.dispose();
 
+        PDDocument document = new PDDocument();
+
+        PDPage page = new PDPage(
+                new PDRectangle(
+                        plantilla.getWidth(),
+                        plantilla.getHeight()
+                )
+        );
+
+        document.addPage(page);
+
+        PDImageXObject pdImage =
+                LosslessFactory.createFromImage(
+                        document,
+                        plantilla
+                );
+
+        PDPageContentStream contentStream =
+                new PDPageContentStream(
+                        document,
+                        page
+                );
+
+        contentStream.drawImage(
+                pdImage,
+                0,
+                0,
+                plantilla.getWidth(),
+                plantilla.getHeight()
+        );
+
+        contentStream.close();
+
         ByteArrayOutputStream outputStream =
                 new ByteArrayOutputStream();
 
-        ImageIO.write(
-                plantilla,
-                "PNG",
-                outputStream
-        );
+        document.save(outputStream);
+
+        document.close();
 
         return outputStream.toByteArray();
     }
