@@ -55,7 +55,26 @@ public class ClienteController {
 
         return "cliente-form";
     }
+    @GetMapping("/editar/{id}")
+    public String editar(
+            @PathVariable String id,
+            Model model
+    ) {
 
+        Cliente cliente = clienteRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Cliente no encontrado"
+                        ));
+
+        model.addAttribute(
+                "cliente",
+                cliente
+        );
+
+        return "cliente-form";
+    }
     @PostMapping("/guardar")
     public String guardar(
             @ModelAttribute Cliente cliente) {

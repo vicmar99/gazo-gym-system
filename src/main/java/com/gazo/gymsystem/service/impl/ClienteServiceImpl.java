@@ -22,19 +22,23 @@ public class ClienteServiceImpl implements ClienteService {
     public List<Cliente> listarTodos() {
         return clienteRepository.findAll();
     }
-
+    
     @Override
     public Cliente guardar(Cliente cliente) {
 
-        cliente.setIdCliente(
-                IdGenerator.generarIdCliente()
-        );
+        if (cliente.getIdCliente() == null
+                || cliente.getIdCliente().isBlank()) {
 
-        cliente.setFechaRegistro(
-                LocalDateTime.now()
-        );
+            cliente.setIdCliente(
+                    IdGenerator.generarIdCliente()
+            );
 
-        cliente.setActivo(true);
+            cliente.setFechaRegistro(
+                    LocalDateTime.now()
+            );
+
+            cliente.setActivo(true);
+        }
 
         return clienteRepository.save(cliente);
     }
