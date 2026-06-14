@@ -34,7 +34,14 @@
     </span>
 
 </p>
+<hr>
 
+<button type="button"
+        th:onclick="|window.location.href='@{/pagos/nuevo/{idCliente}(idCliente=${cliente.idCliente})}'|">
+
+  Registrar pago
+
+</button>
 <hr>
 
 <h2>Historial de pagos</h2>

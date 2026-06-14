@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 
@@ -94,5 +95,32 @@ public class PagoController {
 
     }
 
+    @GetMapping("/pagos/nuevo/{idCliente}")
+    public String nuevoPago(
+            @PathVariable String idCliente,
+            Model model
+    ) {
+
+        model.addAttribute(
+                "clientes",
+                clienteRepository.findAll()
+        );
+
+        model.addAttribute(
+                "membresias",
+                membresiaRepository.findAll()
+        );
+
+        PagoRequest pagoRequest = new PagoRequest();
+
+        pagoRequest.setIdCliente(idCliente);
+
+        model.addAttribute(
+                "pagoRequest",
+                pagoRequest
+        );
+
+        return "pagos/formulario";
+    }
 
 }
