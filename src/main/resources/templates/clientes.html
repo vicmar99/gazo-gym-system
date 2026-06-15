@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
   <title>Clientes</title>
 </head>
 <body>
@@ -19,15 +20,48 @@
     <th>ID</th>
     <th>Nombre</th>
     <th>Teléfono</th>
+    <th>Estatus</th>
   </tr>
 
   <tr th:each="cliente : ${clientes}">
 
     <td th:text="${cliente.idCliente}"></td>
 
-    <td th:text="${cliente.nombre}"></td>
+    <td>
+      <a th:href="@{/clientes/{id}(id=${cliente.idCliente})}"
+         th:text="${cliente.nombre}">
+      </a>
+    </td>
 
     <td th:text="${cliente.telefono}"></td>
+
+    <td>
+
+            <span th:if="${cliente.fechaVencimiento == null}"
+                  style="color: gray; font-weight: bold;">
+                ⚪ SIN MEMBRESÍA
+            </span>
+
+      <span th:if="${cliente.fechaVencimiento != null
+                          and cliente.fechaVencimiento.isBefore(T(java.time.LocalDateTime).now())}"
+            style="color: red; font-weight: bold;">
+                🔴 VENCIDO
+            </span>
+
+      <span th:if="${cliente.fechaVencimiento != null
+                          and cliente.fechaVencimiento.isAfter(T(java.time.LocalDateTime).now())
+                          and cliente.fechaVencimiento.isBefore(T(java.time.LocalDateTime).now().plusDays(3))}"
+            style="color: orange; font-weight: bold;">
+                🟡 VENCE PRONTO
+            </span>
+
+      <span th:if="${cliente.fechaVencimiento != null
+                          and cliente.fechaVencimiento.isAfter(T(java.time.LocalDateTime).now().plusDays(3))}"
+            style="color: green; font-weight: bold;">
+                🟢 ACTIVO
+            </span>
+
+    </td>
 
   </tr>
 
@@ -35,3 +69,4 @@
 
 </body>
 </html>
+

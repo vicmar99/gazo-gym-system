@@ -22,7 +22,7 @@ public class ClienteServiceImpl implements ClienteService {
     public List<Cliente> listarTodos() {
         return clienteRepository.findAll();
     }
-    
+
     @Override
     public Cliente guardar(Cliente cliente) {
 

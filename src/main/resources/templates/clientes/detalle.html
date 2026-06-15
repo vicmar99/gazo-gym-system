@@ -19,11 +19,28 @@
   <span th:text="${cliente.telefono}"></span>
 </p>
 
-<p>
   <strong>Estatus:</strong>
-  <span th:text="${cliente.estatus}"></span>
-</p>
 
+  <span th:if="${estatusMembresia == 'ACTIVO'}"
+        style="color: green; font-weight: bold;">
+        🟢 ACTIVO
+    </span>
+
+  <span th:if="${estatusMembresia == 'VENCE_PRONTO'}"
+        style="color: orange; font-weight: bold;">
+        🟡 VENCE PRONTO
+    </span>
+
+  <span th:if="${estatusMembresia == 'VENCIDO'}"
+        style="color: red; font-weight: bold;">
+        🔴 VENCIDO
+    </span>
+
+  <span th:if="${estatusMembresia == 'SIN_MEMBRESIA'}"
+        style="color: gray; font-weight: bold;">
+        ⚪ SIN MEMBRESÍA
+    </span>
+</p>
 <p>
   <strong>Vence:</strong>
 

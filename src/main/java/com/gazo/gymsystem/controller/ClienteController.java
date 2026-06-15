@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -117,6 +119,40 @@ public class ClienteController {
                                 id
                         )
         );
+
+        if (cliente.getFechaVencimiento() != null) {
+
+            if (cliente.getFechaVencimiento().isBefore(
+                    LocalDateTime.now())) {
+
+                model.addAttribute(
+                        "estatusMembresia",
+                        "VENCIDO"
+                );
+
+            } else if (cliente.getFechaVencimiento().isBefore(
+                    LocalDateTime.now().plusDays(3))) {
+
+                model.addAttribute(
+                        "estatusMembresia",
+                        "VENCE_PRONTO"
+                );
+
+            } else {
+
+                model.addAttribute(
+                        "estatusMembresia",
+                        "ACTIVO"
+                );
+            }
+
+        } else {
+
+            model.addAttribute(
+                    "estatusMembresia",
+                    "SIN_MEMBRESIA"
+            );
+        }
 
         return "clientes/detalle";
     }
