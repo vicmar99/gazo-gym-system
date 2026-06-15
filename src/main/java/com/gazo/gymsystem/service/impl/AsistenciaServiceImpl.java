@@ -51,6 +51,27 @@ public class AsistenciaServiceImpl implements AsistenciaService {
 
         }
 
+        var ultimaAsistencia =
+                asistenciaRepository
+                        .findTopByClienteIdClienteOrderByFechaHoraDesc(
+                                cliente.getIdCliente()
+                        );
+
+        if (ultimaAsistencia.isPresent()) {
+
+            LocalDateTime haceTreintaMinutos =
+                    LocalDateTime.now().minusMinutes(30);
+
+            if (ultimaAsistencia.get()
+                    .getFechaHora()
+                    .isAfter(haceTreintaMinutos)) {
+
+                return "ASISTENCIA YA REGISTRADA PARA "
+                        + cliente.getNombre();
+
+            }
+        }
+
         Asistencia asistencia = new Asistencia();
 
         asistencia.setCliente(cliente);
@@ -59,8 +80,8 @@ public class AsistenciaServiceImpl implements AsistenciaService {
 
         asistenciaRepository.save(asistencia);
 
-        return "ACCESO PERMITIDO - " +
-                cliente.getNombre();
+        return "ACCESO PERMITIDO - "
+                + cliente.getNombre();
     }
 
     private String extraerId(String qr) {
